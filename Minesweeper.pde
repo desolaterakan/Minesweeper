@@ -1,12 +1,11 @@
 import de.bezier.guido.*;
-//Declare and initialize constants NUM_ROWS and NUM_COLS = 20
-public final static int NUM_COLS = 20;
-public final static int NUM_ROWS = 20;
-public final static int MINE_COUNT = 60;
+public final static int NUM_COLS = 25;
+public final static int NUM_ROWS = 25;
+public final static int NUM_MINES = 75;
 public boolean firstClick;
 public int minedCount;
-private MSButton[][] buttons; //2d array of minesweeper buttons
-private ArrayList <MSButton> mines; //ArrayList of just the minesweeper buttons that are mined
+private MSButton[][] buttons; // 2d array of minesweeper buttons
+private ArrayList <MSButton> mines; // ArrayList of just the minesweeper buttons that are mined
 
 void setup ()
 {
@@ -14,14 +13,14 @@ void setup ()
     textAlign(CENTER,CENTER);
     
     // make the manager
-    Interactive.make( this );
+    Interactive.make(this);
     
     //your code to initialize buttons goes here
     buttons = new MSButton[NUM_ROWS][NUM_COLS];
 
-    for(int i = 0; i < NUM_ROWS; i++){
-        for(int j = 0; j < NUM_COLS; j++){
-            buttons[i][j] = new MSButton(i, j);
+    for(int e = 0; e < NUM_ROWS; e++){
+        for(int t = 0; t < NUM_COLS; t++){
+            buttons[e][t] = new MSButton(e, t);
         }
     }
 
@@ -35,7 +34,7 @@ void setup ()
 
 public void setMines(int r, int c)
 {
-    for(int i = 0; i < MINE_COUNT; i++){
+    for(int e = 0; e < NUM_MINES; e++){
         int row = (int)(Math.random()*NUM_ROWS);
         int col = (int)(Math.random()*NUM_COLS);
         if(!mines.contains(buttons[row][col])){
@@ -47,7 +46,7 @@ public void setMines(int r, int c)
 }
 public void setMines()
 {
-    for(int i = 0; i < MINE_COUNT; i++){
+    for(int e = 0; e < NUM_MINES; e++){
         int row = (int)(Math.random()*NUM_ROWS);
         int col = (int)(Math.random()*NUM_COLS);
         if(!mines.contains(buttons[row][col])){
@@ -63,7 +62,7 @@ public void draw ()
 }
 public boolean isWon()
 {
-    return !(minedCount < ((NUM_ROWS * NUM_COLS) - MINE_COUNT));
+    return !(minedCount < ((NUM_ROWS * NUM_COLS) - NUM_MINES));
 }
 public void displayLosingMessage()
 {
@@ -89,9 +88,9 @@ public void displayWinningMessage()
     buttons[0][6].setLabel("N");
 }
 public void gameOver() {
-    for(int i = 0; i < NUM_ROWS; i++){
-        for(int j = 0; j < NUM_COLS; j++){
-            buttons[i][j].gameOver();
+    for(int e = 0; e < NUM_ROWS; e++){
+        for(int t = 0; t < NUM_COLS; t++){
+            buttons[e][t].gameOver();
         }
     }
 }
@@ -103,9 +102,9 @@ public int countMines(int row, int col)
 {
     int numMines = 0;
 
-    for(int i = row - 1; i <= row + 1; i++){
-        for(int j = col - 1; j <= col + 1; j++){
-            if(isValid(i, j) && mines.contains(buttons[i][j])){
+    for(int e = row - 1; e <= row + 1; e++){
+        for(int t = col - 1; t <= col + 1; t++){
+            if(isValid(e, t) && mines.contains(buttons[e][t])){
                 numMines++;
             }
         }
@@ -138,14 +137,14 @@ public class MSButton
     public void mousePressed() 
     {
         if(firstClick && mines.contains(this)){
-            for(int i = mines.size() - 1; i >= 0; i--){
+            for(int e = mines.size() - 1; e >= 0; e--){
                 mines.remove(i);
             }
             setMines(myRow, myCol);
         }
         if(firstClick && countMines(myRow, myCol) > 0){
             while (countMines(myRow, myCol) > 0){
-                for(int i = mines.size() - 1; i >= 0; i--){
+                for(int e = mines.size() - 1; e >= 0; i--){
                     mines.remove(i);
                 }
                 setMines(myRow, myCol);
@@ -170,10 +169,10 @@ public class MSButton
             }else{
                 clickable = false;
                 minedCount++;
-                for(int i = -1; i <= 1; i++){
-                    for(int j = -1; j <= 1; j++){
-                        if(isValid(myRow + i, myCol + j) && buttons[myRow + i][myCol + j].checkClicked()){
-                            buttons[myRow + i][myCol + j].mousePressed();
+                for(int e = -1; e <= 1; e++){
+                    for(int t = -1; t <= 1; t++){
+                        if(isValid(myRow + e, myCol + t) && buttons[myRow + e][myCol + t].checkClicked()){
+                            buttons[myRow + e][myCol + t].mousePressed();
                         }
                     }
                 }
