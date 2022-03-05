@@ -4,8 +4,8 @@ public final static int NUM_ROWS = 25;
 public final static int NUM_MINES = 75;
 public boolean flag;
 public int count;
-private MSButton[][] buttons; //2d array of minesweeper buttons
-private ArrayList <MSButton> mines; //ArrayList of just the minesweeper buttons that are mined
+private MSButton[][] buttons; // 2d array of minesweeper buttons
+private ArrayList <MSButton> mines; // ArrayList of just the minesweeper buttons that are mined
 
 void setup() {
   size(400, 400);
@@ -14,7 +14,7 @@ void setup() {
   // make the manager
   Interactive.make(this);
 
-  //your code to initialize buttons goes here
+  // your code to initialize buttons goes here
   buttons = new MSButton[NUM_ROWS][NUM_COLS];
   for (int e = 0; e < NUM_ROWS; e++) {
     for (int t = 0; t < NUM_COLS; t++) {
